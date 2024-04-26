@@ -18,6 +18,7 @@ public class API {
 
         String apiKey = "8d042808b84c320303f9f065804a23d4b989f593ffe7a86d752162576ee12a7d";
         String College = "Universidad de Colima";
+        College = College.replace(" ", "+");
             // Construir la URL de la solicitud
         String urlString = "https://serpapi.com/search.json?engine=google_scholar_profiles&mauthors="+College+"&hl=es&api_key="+apiKey;
         // Solicitar al usuario que ingrese la consulta de búsqueda
