@@ -48,9 +48,11 @@ public class API {
             if (jsonResponse.has("profiles") && jsonResponse.get("profiles") instanceof JSONArray) {
                 JSONArray profiles = jsonResponse.getJSONArray("profiles");
 
-                // Imprimir el array "profiles" de manera formateada
-                System.out.println("Profiles:");
-                System.out.println(profiles.toString(4)); // El valor 4 indica la cantidad de espacios de indentación
+                System.out.println("Top 10 Investigadores: ");
+                for (int i = 0;i<Math.min(10, profiles.length());i++){
+                    JSONObject profile = profiles.getJSONObject(i);
+                    System.out.println(profile.toString(4));
+                }
             } else {
                 System.out.println("No se encontraron perfiles.");
             }
