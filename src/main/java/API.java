@@ -81,28 +81,57 @@ public class API {
 
             // Analizar la respuesta JSON
             JSONObject jsonResponse = new JSONObject(response.toString());
-
+            String author_name = "";
             // Verificar si la respuesta contiene la clave "author"
             if (jsonResponse.has("author") && jsonResponse.get("author") instanceof JSONObject) {
                 JSONObject authorObject = jsonResponse.getJSONObject("author");
 
-                String author_name = authorObject.getString("name");
+                author_name = authorObject.getString("name");
                 String author_affiliations = authorObject.getString("affiliations");
 
                 //wait for the moment to send this data into a database and show it in the interface
                 System.out.println("Data del autor " + num + ":");
                 System.out.println("Nombre: " + author_name);
-                System.out.println("Email: " + authors);
+                System.out.println("Google Scholar Id: " + authors);
                 System.out.println("Afiliaciones: " + author_affiliations);
-                System.out.println("-------------------------------------------------------------------");
+                System.out.println("Profile Link: " + "https://scholar.google.com/citations?&user="+ authors );
+                System.out.println(".........................................................................");
             } else {
                 System.out.println("No se encontraron datos del autor.");
             }
 
+            // Verificar si la respuesta contiene la clave "articles"
+            if (jsonResponse.has("articles") && jsonResponse.get("articles") instanceof JSONArray) {
+                JSONArray articlesArray = jsonResponse.getJSONArray("articles");
+
+                System.out.println("Ultimos 3 articulos: ");
+                for (int j = 0; j < Math.min(3, articlesArray.length()); j++) {
+                    JSONObject article = articlesArray.getJSONObject(j);
+                    int No = j;
+                    No++;
+                    //System.out.println(profile.toString(4));
+                    String articles_title = article.getString("title");
+                    String articles_link = article.getString("link"); 
+                    String articles_authors = article.getString("authors");
+                    
+                    //wait for the moment to send this data into a database and show it in the interface
+                    System.out.println("Articulo No: " + No);
+                    System.out.println("Link: " + articles_title);
+                    System.out.println("Link: " + articles_link);
+                    System.out.println("Autores: " + articles_authors);
+                    System.out.println("                                                                      ");
+                    
+                }
+                System.out.println("-------------------------------------------------------------------");
+            } else {
+                System.out.println("No se encontraron datos del autor.");
+            }
+            
             // Cerrar la conexión
             connection.disconnect();
         } catch (IOException | JSONException e) {
             e.printStackTrace();
         }
     }
+    
 }
