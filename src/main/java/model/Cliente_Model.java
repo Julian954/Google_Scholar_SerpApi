@@ -4,6 +4,7 @@
  */
 package model;
 
+import Mysql.Conexion;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -12,6 +13,11 @@ import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.Scanner;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -129,6 +135,42 @@ public class Cliente_Model {
                 System.out.println("Afiliaciones: " + author_affiliations);//use
                 System.out.println("Profile Link: " + "https://scholar.google.com/citations?&user="+ Auth_Id );//use
                 System.out.println("        ");
+                
+                //database insertion
+                
+                Connection cx = null;
+                PreparedStatement pstmt = null;
+                try{
+                    Conexion conexion = new Conexion();
+                    cx = conexion.Conexion();
+                    String sql = "INSERT INTO autor (Author_Id, Author_Name, Author_Afila, Author_Link) VALUES (?, ?, ?, ?)";
+                    
+                    pstmt = cx.prepareStatement(sql);
+                    pstmt.setString(1, Auth_Id);
+                    pstmt.setString(2, author_name);
+                    pstmt.setString(3, author_affiliations);
+                    pstmt.setString(4, "https://scholar.google.com/citations?&user=" + Auth_Id);
+                    pstmt.executeUpdate();
+                    
+                } catch (SQLException ex) {
+                Logger.getLogger(Cliente_Model.class.getName()).log(Level.SEVERE, null, ex);
+                } finally{
+                    if (pstmt != null){
+                        try{
+                            pstmt.close();
+                        }catch (SQLException ex) {
+                            Logger.getLogger(Cliente_Model.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }
+                    if (cx != null){
+                        try {
+                            cx.close();
+                        } catch (SQLException ex) {
+                            Logger.getLogger(Cliente_Model.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }
+                }
+
             } else {
                 System.out.println("No se encontraron datos del autor.");
             }
@@ -153,6 +195,41 @@ public class Cliente_Model {
                     System.out.println("Link: " + articles_link);//use
                     System.out.println("Autores: " + articles_authors);//
                     System.out.println("                                                                      ");
+                    
+                    //database insertion
+                    
+                    Connection cx = null;
+                    PreparedStatement pstmt = null;
+                    try{
+                        Conexion conexion = new Conexion();
+                        cx = conexion.Conexion();
+                        String sql = "INSERT INTO articulos (Article_Title, Article_Autors, Article_Link, Article_AutorId) VALUES (?, ?, ?, ?)";
+
+                        pstmt = cx.prepareStatement(sql);
+                        pstmt.setString(1, articles_title);
+                        pstmt.setString(2, articles_authors);
+                        pstmt.setString(3, articles_link);
+                        pstmt.setString(4, Auth_Id);
+                        pstmt.executeUpdate();
+
+                    } catch (SQLException ex) {
+                    Logger.getLogger(Cliente_Model.class.getName()).log(Level.SEVERE, null, ex);
+                    } finally{
+                        if (pstmt != null){
+                            try{
+                                pstmt.close();
+                            }catch (SQLException ex) {
+                                Logger.getLogger(Cliente_Model.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                        }
+                        if (cx != null){
+                            try {
+                                cx.close();
+                            } catch (SQLException ex) {
+                                Logger.getLogger(Cliente_Model.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                        }
+                    }
                 }
             }
         }catch (IOException | JSONException e) {
