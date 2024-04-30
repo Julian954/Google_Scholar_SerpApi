@@ -24,7 +24,6 @@ public class Conexion {
     public Connection Conexion(){
         try {
             Class.forName(driver);
-            System.out.println("Conectado con la base de datos");
             cx=DriverManager.getConnection(url+db,user,password);
         } catch (ClassNotFoundException | SQLException ex) {
             System.out.println("Error al conectar con la base de datos");

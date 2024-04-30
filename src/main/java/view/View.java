@@ -37,7 +37,7 @@ public class View extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setText("Ingresa el Nombre Completo de la Universidad: ");
+        jLabel1.setText("Ingresa el Nombre Completo de la Institucion: ");
 
         jLabel2.setFont(new java.awt.Font("Serif", 1, 20)); // NOI18N
         jLabel2.setText("Exportar Data de Investigadores");

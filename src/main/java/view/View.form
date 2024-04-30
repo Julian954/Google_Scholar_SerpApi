@@ -98,7 +98,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Ingresa el Nombre Completo de la Universidad: "/>
+        <Property name="text" type="java.lang.String" value="Ingresa el Nombre Completo de la Institucion: "/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel2">

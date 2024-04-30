@@ -4,6 +4,5 @@ model\Cliente_Model.class
 view\View$3.class
 view\View$1.class
 view\View.class
-view\Cliente_View.class
 Mysql\Conexion.class
 view\View$2.class
