@@ -1,7 +1,6 @@
 # Google_Scholar_SerpApi
 
 ### **Introducción:**
-El objetivo de este repositorio es realizar una peticion a la api de serpapi para poder obtener datos de Google Scholar y guardarlos en la base de datos haciendo uso del patron de diseno MVC en Java.
 
 La API de Google Scholar de SerpApi permite obtener los resultados de búsqueda de Google Scholar. Se accede a través del endpoint **`/search?engine=google_scholar`** y se puede consultar utilizando una solicitud GET. La API es útil para obtener información específica de Google Scholar.
 
