@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package model;
 
 import Mysql.Conexion;
@@ -19,11 +15,7 @@ import java.util.logging.Logger;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-//import mysql.Conexion;
-/**
- *
- * @author Usuario
- */
+
 public class Cliente_Model {
     private String College;
     private String apiKey;
@@ -199,12 +191,15 @@ public class Cliente_Model {
                     String articles_title = article.getString("title");
                     String articles_link = article.getString("link"); 
                     String articles_authors = article.getString("authors");
+                    String articles_year = article.getString("year");
+                    
                     
                     //wait for the moment to send this data into a database and show it in the interface
                     System.out.println("Articulo No: " + No); //useless
                     System.out.println("Titulo: " + articles_title); //use
                     System.out.println("Link: " + articles_link);//use
                     System.out.println("Autores: " + articles_authors);//
+                    System.out.println("Year: " + articles_year);//
                     System.out.println("                                                                      ");
                     
                     //database insertion
@@ -225,12 +220,13 @@ public class Cliente_Model {
                         
                         if(rs.next()){
                         }else{
-                            String sql = "INSERT INTO articulos (Article_Title, Article_Autors, Article_Link, Article_AutorId) VALUES (?, ?, ?, ?)";
+                            String sql = "INSERT INTO articulos (Article_Title, Article_Autors, Article_Link, Article_AutorId, Article_Year) VALUES (?, ?, ?, ?, ?)";
                             pstmt = cx.prepareStatement(sql);
                             pstmt.setString(1, articles_title);
                             pstmt.setString(2, articles_authors);
                             pstmt.setString(3, articles_link);
                             pstmt.setString(4, Auth_Id);
+                            pstmt.setString(5, articles_year);
                             pstmt.executeUpdate();
                         }
 

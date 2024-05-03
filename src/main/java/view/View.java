@@ -4,6 +4,7 @@
  */
 package view;
 
+
 /**
  *
  * @author Usuario
@@ -36,6 +37,7 @@ public class View extends javax.swing.JFrame {
         txtApikey = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setIconImage(getIconImage());
 
         jLabel1.setText("Ingresa el Nombre Completo de la Institucion: ");
 
